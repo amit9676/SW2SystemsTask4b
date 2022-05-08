@@ -5,7 +5,7 @@
 
 using namespace std;
 namespace coup{
-    Assassin::Assassin(const Game& game, const string &name):Player(game,name){
+    Assassin::Assassin(Game& game, const string &name):Player(game,name){
         this->role1 = "Assassin";
     }
 
@@ -13,21 +13,23 @@ namespace coup{
 
     void Assassin::coup(Player& p){
         this->isTurn();
-        this->notAlive(*this);
+        this->notAlive();
+        const int seven = 7;
+        const int three = 3;
 
-        if(this->coins() >=7){
+        if(this->coins() >=seven){
             p.deadOrAlive = "dead";
             //pair<string,*pl
-            this->game.lastActions[this->name] = pair<string,Player*>("coup",&p);
+            this->game->lastActions[this->name] = pair<string,Player*>("coup",&p);
         }
-        else if(this->coins() >= 3){
+        else if(this->coins() >= three){
             p.deadOrAlive = "almost";
-            this->game.lastActions[this->name] = pair<string,Player*>("assassination",&p);
+            this->game->lastActions[this->name] = pair<string,Player*>("assassination",&p);
         }
         else{
-            //throw exception
+            throw runtime_error("not enough coins for assassination");
         }
-        game.update();
+        game->update();
         
     }
 

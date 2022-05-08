@@ -6,43 +6,43 @@
 
 using namespace std;
 namespace coup{
-    Ambassador::Ambassador(const Game& game, const string &name):Player(game,name){
+    Ambassador::Ambassador(Game& game, const string &name):Player(game,name){
         this->role1 = "Ambassador";
     }
 
     Ambassador::~Ambassador(){}
 
     void Ambassador::block(Player& p){
-        this->notAlive(*this);
+        this->notAlive();
         if(p.role() != "Captain"){
             //throw exception
         }
-        if(this->game.lastActions[p.name].first != "steal"){
+        if(this->game->lastActions[p.name].first != "steal"){
             //throw excption
         }
-        if(p.deadOrAlive != "alive" || this->game.lastActions[p.name].second->deadOrAlive != "alive"){
+        if(p.deadOrAlive != "alive" || this->game->lastActions[p.name].second->deadOrAlive != "alive"){
             //throw exception
         }
-        Captain* c = (Captain* )&p;
+        Captain* c = dynamic_cast<Captain*>(&p);
         c->coin -= c->lastSteal;
-        this->game.lastActions[p.name].second->coin += c->lastSteal;
+        this->game->lastActions[p.name].second->coin += c->lastSteal;
     }
 
     void Ambassador::transfer(Player& giver, Player& reciever){
         this->isTurn();
-        this->notAlive(*this);
-        this->moreThanTen(*this);
+        this->notAlive();
+        this->moreThanTen();
         if(giver.deadOrAlive != "alive" || reciever.deadOrAlive != "alive"){
-            //throw exception
+            throw runtime_error("both giver and reciever must be active players");
         }
         if(giver.coin < 1){
-            //throw exception
+            throw runtime_error("giver dont have any coins");
 
         }
         giver.coin--;
         reciever.coin++;
-        this->game.lastActions[this->name] = pair<string,Player*>("transfer",nullptr);
-        game.update();
+        this->game->lastActions[this->name] = pair<string,Player*>("transfer",nullptr);
+        game->update();
     }
 
 }

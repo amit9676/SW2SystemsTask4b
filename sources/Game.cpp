@@ -30,7 +30,7 @@ namespace coup{
 
     string Game::turn(){
         for(size_t i = 0; i < this->player.size(); i++){
-            if(this->player[i]->turn == true){
+            if(this->player[i]->turn){
                 return this->player[i]->name;
             }
         }

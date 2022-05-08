@@ -7,7 +7,7 @@ namespace coup{
         private:
 
         public:
-            Contessa(const Game&, const string&);
+            Contessa(Game&, const string&);
             void block(Player&);
             ~Contessa();
 

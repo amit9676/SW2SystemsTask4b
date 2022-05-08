@@ -8,7 +8,7 @@ namespace coup{
             //bool specialCoup;
 
         public:
-        Assassin(const Game&, const string&);
+        Assassin(Game&, const string&);
         //void assasination(Game game, string target);
         void coup(Player&);
         ~Assassin();

@@ -7,7 +7,7 @@ namespace coup{
         private:
 
         public:
-        Captain(const Game& game, const string&);
+        Captain(Game& game, const string&);
         void steal(Player&);
         void block(Player&);
         ~Captain();

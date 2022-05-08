@@ -7,7 +7,7 @@ namespace coup{
         private:
 
         public:
-        Duke(const Game&, const string&);
+        Duke(Game&, const string&);
         void block(Player&);
         void tax();
         ~Duke();

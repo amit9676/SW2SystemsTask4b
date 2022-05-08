@@ -15,7 +15,7 @@ namespace coup{
             string name;
             bool turn;
             string deadOrAlive;
-            coup::Game game;
+            coup::Game* game;
             int coin;
             Player(coup::Game&, const string&);
 
@@ -23,12 +23,12 @@ namespace coup{
             void foreign_aid();
             virtual void coup(Player&);
             string role();
-            int coins();
+            int coins() const;
             ~Player();
             
-            void isTurn();
-            void notAlive(Player&);
-            void moreThanTen(Player&);
+            void isTurn() const;
+            void notAlive() const;
+            void moreThanTen() const;
 
         
     };
