@@ -1,4 +1,3 @@
-
 #include <string>
 #include "Ambassador.hpp"
 #include "Player.hpp"
@@ -15,13 +14,13 @@ namespace coup{
     void Ambassador::block(Player& p){
         this->notAlive();
         if(p.role() != "Captain"){
-            //throw exception
+            throw runtime_error("ambassador can only block captain");
         }
         if(this->game->lastActions[p.name].first != "steal"){
-            //throw excption
+            throw runtime_error("captain last action was not steal");
         }
         if(p.deadOrAlive != "alive" || this->game->lastActions[p.name].second->deadOrAlive != "alive"){
-            //throw exception
+            throw runtime_error("captain and its target must be alive");
         }
         Captain* c = dynamic_cast<Captain*>(&p);
         c->coin -= c->lastSteal;
@@ -29,6 +28,7 @@ namespace coup{
     }
 
     void Ambassador::transfer(Player& giver, Player& reciever){
+        this->loneParticipent();
         this->isTurn();
         this->notAlive();
         this->moreThanTen();

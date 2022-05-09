@@ -11,20 +11,18 @@ namespace coup{
     class Game
     {
         private:
-            //vector<string> player;
-            
-            //string turns;
         public:
             Game();
             ~Game();
+            bool gameStarted;
             deque<Player*> player;
+            vector<Player*> auxelleryList;
             string turn();
             vector<string> players();
-            //static vector<string> players();
             string winner();
             map<string,pair<string,Player*>> lastActions;
             void addPlayer(Player &p);
             void update();
-            //void checkturn();
+            void auxelleryUpdate();
     };
 }

@@ -12,16 +12,17 @@ namespace coup{
     Duke::~Duke(){}
 
     void Duke::block(Player& p){
-        //(if on memory last action of said player is not foreign aid - throw exception)
-        //else if said player is no alonger alive - throw exception
+        this->notAlive();
+        p.notAlive();
         if(game->lastActions[p.name].first != "foreignAid"){
             throw runtime_error("player last move was not foreign aid");
         }
-        this->notAlive();
+        
         p.coin -= 2;
     }
 
     void Duke::tax(){
+        this->loneParticipent();
         this->isTurn();
         this->notAlive();
         this->moreThanTen();

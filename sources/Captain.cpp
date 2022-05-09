@@ -1,6 +1,4 @@
-//#include "Player.hpp" 
 #include <string>
-//#include "Game.hpp"
 #include "Captain.hpp"
 #include "Player.hpp"
 
@@ -14,12 +12,13 @@ namespace coup{
     Captain::~Captain(){}
 
     void Captain::steal(Player& p){
+        this->loneParticipent();
         this->isTurn();
         this->notAlive();
         this->moreThanTen();
 
         this->game->lastActions[this->name] = pair<string,Player*>("steal",&p);
-        if(p.coin > 2){
+        if(p.coin >= 2){
             p.coin -=2;
             this->coin+=2;
             this->lastSteal = 2;

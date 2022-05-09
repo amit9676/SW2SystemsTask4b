@@ -17,6 +17,7 @@ namespace coup{
             string deadOrAlive;
             coup::Game* game;
             int coin;
+            int joinerIndex;
             Player(coup::Game&, const string&);
 
             void income();
@@ -29,6 +30,7 @@ namespace coup{
             void isTurn() const;
             void notAlive() const;
             void moreThanTen() const;
+            void loneParticipent() const;
 
         
     };
